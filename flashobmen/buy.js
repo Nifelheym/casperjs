@@ -1,5 +1,5 @@
 // логика работает работает для сайтов https://flashobmen.com   https://el-change.com   https://top-exchange.com/    https://papa-change.com/   https://f-change.biz/   https://fastexchange.center
-function createForm(url, summ, sendWallet, reciveSumm, reciveWallet, email, phone) {
+function createForm() {
 // let self = this;
 
 const casper = require('casper').create({
@@ -11,7 +11,7 @@ const casper = require('casper').create({
     },
     logLevel: "debug"
 });
-casper.start(url);    
+casper.start(casper.cli.get('url'));    
 // // тык по клавише обмена на
 
 casper.then(function(){
@@ -20,8 +20,10 @@ casper.then(function(){
     // })
 });
 casper.then(function(){
-    this.wait('2000', function() {
-    this.click('div[num_recive="recive_1"] div.ethereum_obmen_btn span');
+    this.wait('1000', function() {
+        var stroka = 'div[num_recive="recive_1"] div.' + casper.cli.get('valuta') + '_obmen_btn span';
+        this.click(stroka);
+    //this.click('div[num_recive="recive_1"] div.ethereum_obmen_btn span');
     })
 });
 
@@ -32,12 +34,12 @@ casper.then(function() {
     // this.wait('3000', function() {
     casper.waitForSelector('form[method="post"][class="user_obmen_form"]', function() {
         casper.fillSelectors('form[method="post"]', {
-          'input[name="send_summ"]': summ,
-          'input[name="send_wallet"]': sendWallet,
-          'input[name="recive_summ"]': reciveSumm,
-          'input[name="recive_wallet"]': reciveWallet,
-          'input[name="user_email"]': email,
-          'input[name="user_phone"]': phone,
+          'input[name="send_summ"]': casper.cli.get('summ'),
+          'input[name="send_wallet"]': casper.cli.get('sendWallet'),
+          'input[name="recive_summ"]': casper.cli.get('reciveSumm'),
+          'input[name="recive_wallet"]': casper.cli.get('reciveWallet'),
+          'input[name="user_email"]': casper.cli.get('email'),
+          'input[name="user_phone"]': casper.cli.get('phone'),
         }, true);
       });
     // });
@@ -46,9 +48,20 @@ casper.then(function() {
 // подтверждение операции
 
 casper.then(function(){
-    this.wait('2000', function(){
+    this.wait('1000', function(){
     this.click('input[name="order_confirm_btn"]');
     });
+});
+
+casper.then(function() {
+    this.wait('2000', function(){
+    var text = this.evaluate(function(){
+        return document.querySelector("div.link_operation_block a").textContent;
+    });
+
+    var word = require('utils').dump(text);
+    console.log(word);
+});
 });
 
 casper.then(function(){
@@ -57,8 +70,10 @@ casper.then(function(){
     });
     console.log("Make a screenshot and save it as AfterLogin.png");
 });
+
 casper.run();
 
+return word;
 }
 
 // let url = 'https://fastexchange.center';
@@ -69,5 +84,5 @@ casper.run();
 // let email = 'Mambares@yandex.ru';
 // let phone = '+79999999911';
 
-createForm('https://fastexchange.center', '5000', '+79999999981', '1.4', '0xDeF149d3718e5aa254c5D8a39751E6F2fE3E9A19', 'Mambares@yandex.ru', '+79999999911');
+createForm();
 
