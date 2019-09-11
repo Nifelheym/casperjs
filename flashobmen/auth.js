@@ -2,11 +2,13 @@
 function authToShop (url, email, password) {
 
 const casper = require('casper').create({
-    pageSettings: {
-        loadImages: false,//The script is much faster when this field is set to false
-        loadPlugins: false,
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36'
-    }
+  verbose: true,
+  pageSettings: {
+      loadImages: false,//The script is much faster when this field is set to false
+      loadPlugins: false,
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36'
+  },
+  logLevel: "debug"
 });
 
 casper.start(url);

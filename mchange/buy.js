@@ -12,24 +12,24 @@ function createForm(url, summ, sendWallet, reciveWallet, email) {
     });
     casper.start(url);    
     // // тык по клавише обмена на
-    casper.then(function (){
-        this.page.sendEvent('keypress', this.page.event.key.Tab);
-        this.page.sendEvent('keypress', this.page.event.key.Space);
-      });
+    // casper.then(function (){
+    //     this.page.sendEvent('keypress', this.page.event.key.Tab);
+    //     this.page.sendEvent('keypress', this.page.event.key.Space);
+    //   });
       
     casper.then(function(){
         this.wait('3000', function() {
-        this.click('ul#from.ps-list>li[data-seo="qiwi"]');
+        this.click('div[data-direct="from"]');
         // this.click('ul#to button.btn.btn-link.show-all');
         });
     });
-    casper.then(function(){
-        this.wait('3000', function() {
-        // casper.waitForSelector('div[class="topics"]', function() {
-        this.click('ul#to.ps-list>li[data-seo="ethereum"]');
-        })
-        // });
-    });
+    // casper.then(function(){
+    //     this.wait('3000', function() {
+    //     // casper.waitForSelector('div[class="topics"]', function() {
+    //     this.click('ul#to.ps-list>li[data-seo="ethereum"]');
+    //     })
+    //     // });
+    // });
     
     
     // заполнение полей
@@ -70,4 +70,4 @@ function createForm(url, summ, sendWallet, reciveWallet, email) {
     // let email = 'Mambares@yandex.ru';
     // let phone = '+79999999911';
     
-    createForm('https://bankcomat.org/', '5000', '+79999999981', '0xDeF149d3718e5aa254c5D8a39751E6F2fE3E9A19', 'Mambares@yandex.ru');
+    createForm('https://mchange.net/', '5000', '+79999999981', '0xDeF149d3718e5aa254c5D8a39751E6F2fE3E9A19', 'Mambares@yandex.ru');
