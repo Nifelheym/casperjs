@@ -1,5 +1,5 @@
 // не вводятся данные(не нажимается кнопка)
-function authToShop (url, email, password) {
+function authToShop () {
 
     const casper = require('casper').create({
         verbose: true,
@@ -11,7 +11,7 @@ function authToShop (url, email, password) {
         logLevel: "debug"
     });
     
-    casper.start(url);
+    casper.start(casper.cli.get('url'));
     
     casper.then(function() {
         this.click('button.navbar-toggle.show_link');
@@ -29,8 +29,8 @@ function authToShop (url, email, password) {
     casper.then(function() {
         casper.waitForSelector('div[class="popup-auth-form"]', function() {
             casper.fillSelectors('div[id="auth-form"]', {
-              'input[name="email"]': email,
-              'input[name="password"]': password
+              'input[name="email"]': casper.cli.get('email'),
+              'input[name="password"]': casper.cli.get('pass')
             }, true);
           });
     });
@@ -52,4 +52,4 @@ function authToShop (url, email, password) {
     
     }
     
-    authToShop('https://60cek.org','Mambares@yandex.ru','JNDJASKDNhb123ads');
+    authToShop();

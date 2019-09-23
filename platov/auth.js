@@ -1,4 +1,4 @@
-function authToShop (url, email, password) {
+function authToShop () {
 
     const casper = require('casper').create({
         verbose: true,
@@ -10,14 +10,14 @@ function authToShop (url, email, password) {
         logLevel: "debug"
     });
     
-    casper.start(url);
+    casper.start(casper.cli.get('url'));
     
     // вход
     casper.then(function() {
         // casper.waitForSelector('form[id="login-form"]', function() {
             casper.fillSelectors('form[method="post"]', {
-              'input[name="LoginForm[username]"]': email,
-              'input[name="LoginForm[password]"]': password
+              'input[name="LoginForm[username]"]': casper.cli.get('email'),
+              'input[name="LoginForm[password]"]': casper.cli.get('pass')
             }, true);
         //   });
     });
@@ -33,4 +33,4 @@ function authToShop (url, email, password) {
     
     }
     
-    authToShop('https://platov.cc/site/login','Mambares@yandex.ru','JNDJASKDNhb123ads');
+    authToShop();

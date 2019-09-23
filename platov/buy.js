@@ -10,7 +10,7 @@ function createForm(url, summ, sendWallet, reciveWallet, email) {
         },
         logLevel: "debug"
     });
-    casper.start(url);    
+    casper.start(casper.cli.get('url'));    
     // // тык по клавише обмена на
     
     casper.then(function(){
@@ -21,7 +21,9 @@ function createForm(url, summ, sendWallet, reciveWallet, email) {
     casper.then(function(){
         this.wait('1000', function() {
         // casper.waitForSelector('div[class="topics"]', function() {
-        this.click('div.target-currency.faq-q[export-code="ETH"]');
+        // this.click('div.target-currency.faq-q[export-code="ETH"]');
+        var stroka = 'div.target-currency.faq-q[export-code="' + casper.cli.get('valuta') + '"]'
+        this.click(stroka);
         })
         // });
     });
@@ -33,11 +35,11 @@ function createForm(url, summ, sendWallet, reciveWallet, email) {
         // this.wait('3000', function() {
         casper.waitForSelector('form[id="exchange-form"]', function() {
             casper.fillSelectors('form[id="exchange-form"]', {
-              'input[id="source-amount"]': summ,
-              'input[id="sender-card"]': sendWallet,
+              'input[id="source-amount"]': casper.cli.get('summ'),
+              'input[id="sender-card"]': casper.cli.get('sendWallet'),
             //   'input[id="target-amount"]': reciveSumm,
-              'input[id="wallet"]': reciveWallet,
-              'input[id="email"]': email,
+              'input[id="wallet"]': casper.cli.get('reciveSumm'),
+              'input[id="email"]': casper.cli.get('reciveWallet'),
             //   'input[id="user_phone"]': phone,
             }, true);
           });

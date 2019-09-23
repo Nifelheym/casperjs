@@ -34,14 +34,14 @@ casper.then(function() {
     // this.wait('3000', function() {
     casper.waitForSelector('form[method="post"][class="user_obmen_form"]', function() {
         casper.fillSelectors('form[method="post"]', {
-          'input[name="send_summ"]': casper.cli.get('summ'),
-          'input[name="send_wallet"]': casper.cli.get('sendWallet'),
-          'input[name="recive_summ"]': casper.cli.get('reciveSumm'),
-          'input[name="recive_wallet"]': casper.cli.get('reciveWallet'),
-          'input[name="user_email"]': casper.cli.get('email'),
-          'input[name="user_phone"]': casper.cli.get('phone'),
+            'input[name="send_summ"]': casper.cli.get('summ'),
+            'input[name="send_wallet"]': casper.cli.get('sendWallet'),
+            'input[name="recive_summ"]': casper.cli.get('reciveSumm'),
+            'input[name="recive_wallet"]': casper.cli.get('reciveWallet'),
+            'input[name="user_email"]': casper.cli.get('email'),
+            'input[name="user_phone"]': casper.cli.get('phone'),
         }, true);
-      });
+    });
     // });
 });
 
