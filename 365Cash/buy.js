@@ -58,14 +58,14 @@ function createForm() {
         this.click('button.btn.btn-success.btn-block');
         });
     });
-    casper.then(function(){
-        this.wait('2000', function(){
-        this.click('input#preorderform-rules_agreements');
-        });
-    });
-    casper.then(function() {
-        this.click('button.btn.btn-success.btn-block');
-    });
+    // casper.then(function(){
+    //     this.wait('2000', function(){
+    //     this.click('input#preorderform-rules_agreements');
+    //     });
+    // });
+    // casper.then(function() {
+    //     this.click('button.btn.btn-success.btn-block');
+    // });
     
     casper.then(function(){
         this.wait('3000', function(){

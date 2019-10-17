@@ -33,7 +33,7 @@ casper.then(function(){
 casper.then(function() {
     // this.wait('3000', function() {
     casper.waitForSelector('form[method="post"][class="user_obmen_form"]', function() {
-        casper.fillSelectors('form[method="post"]', {
+        casper.fillSelectors('form[method="post"][class="user_obmen_form"]', {
             'input[name="send_summ"]': casper.cli.get('summ'),
             'input[name="send_wallet"]': casper.cli.get('sendWallet'),
             'input[name="recive_summ"]': casper.cli.get('reciveSumm'),
@@ -58,9 +58,8 @@ casper.then(function() {
     var text = this.evaluate(function(){
         return document.querySelector("div.link_operation_block a").textContent;
     });
-
-    var word = require('utils').dump(text);
-    console.log(word);
+    console.log(text);
+    console.log('i am here')
 });
 });
 
@@ -73,7 +72,7 @@ casper.then(function(){
 
 casper.run();
 
-return word;
+return text;
 }
 
 // let url = 'https://fastexchange.center';
